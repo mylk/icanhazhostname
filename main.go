@@ -1,7 +1,7 @@
 package main
 
 import (
-    "fmt"
+    "html/template"
     "log"
     "net/http"
     "os"
@@ -23,16 +23,15 @@ func loadPage(name string) (*Page, error) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    var response string
-
     p2, err := loadPage(r.URL.Path[1:])
     if err != nil {
-        response = "Not Found"
-    } else {
-        response = string(p2.Body)
+        http.Error(w, "Not Found", http.StatusNotFound)
+        return
     }
 
-    fmt.Fprintf(w, response)
+    t, _ := template.ParseFiles("index.html")
+    // executes the template, writing the generated HTML to the http.ResponseWriter
+    t.Execute(w, p2)
 }
 
 func main() {
