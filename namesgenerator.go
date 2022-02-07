@@ -835,19 +835,15 @@ var (
 	}
 )
 
-// GetRandomName generates a random name from the list of adjectives and surnames in this package
-// formatted as "adjectivesurname". For example 'focusedturing'. If retry is non-zero, a random
-// integer between 0 and 10 will be added to the end of the name, e.g `focusedturing3`
-func GetRandomName(retry int) string {
+// GetRandomName generates a random name from the list of adjectives and surnames
+// formatted as "adjectivesurname". For example 'focusedturing'.
+func GetRandomName() string {
 begin:
 	name := fmt.Sprintf("%s%s", left[rand.Intn(len(left))], right[rand.Intn(len(right))])
 	if name == "boringwozniak" /* Steve Wozniak is not boring */ {
 		goto begin
 	}
 
-	if retry > 0 {
-		name = fmt.Sprintf("%s%d", name, rand.Intn(10))
-	}
 	return name
 }
 

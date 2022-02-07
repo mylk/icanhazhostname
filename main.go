@@ -31,7 +31,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
     t, _ := template.ParseFiles("index.html")
     // executes the template, writing the generated HTML to the http.ResponseWriter
-    p2.Title = GetRandomName(0)
+    p2.Title = GetRandomName()
     t.Execute(w, p2)
 }
 
