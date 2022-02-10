@@ -62,14 +62,14 @@
 <body>
     <section>
         <div class="container">
-            <h2>{{.Title}}</h2>
+            <h2>{{.Adjective}}{{.Name}}</h2>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus. Turpis in eu mi bibendum neque egestas congue quisque. Quis blandit turpis cursus in hac habitasse. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Aliquet nec ullamcorper sit amet. Arcu cursus euismod quis viverra. Gravida cum sociis natoque penatibus et magnis dis.
-            </p>
+            <p>{{.Description}}</p>
 
             <br />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {{range $url := .Url}}
+                <p><a href="{{$url}}">Read more.</a></p>
+            {{end}}
         </div>
     </section>
 

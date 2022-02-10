@@ -4,35 +4,20 @@ import (
     "html/template"
     "log"
     "net/http"
-    "os"
 )
 
-// body element is a []byte rather than string because that is the type expected by the io libraries we will use
-type Page struct {
-    Title string
-    Body []byte
-}
-
-func loadPage(name string) (*Page, error) {
-    filename := name + ".txt"
-    body, err := os.ReadFile(filename)
-    if err != nil {
-        return nil, err
-    }
-    return &Page{Title: name, Body: body}, nil
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    p2, err := loadPage(r.URL.Path[1:])
-    if err != nil {
-        http.Error(w, "Not Found", http.StatusNotFound)
+func handler(writer http.ResponseWriter, request *http.Request) {
+    if request.URL.Path != "/" {
+        http.Error(writer, "Not Found", http.StatusNotFound)
         return
     }
 
-    t, _ := template.ParseFiles("index.html")
+    tmpl, _ := template.ParseFiles("index.html")
+
+    person := GetRandomName()
+
     // executes the template, writing the generated HTML to the http.ResponseWriter
-    p2.Title = GetRandomName().Adjective + GetRandomName().Name
-    t.Execute(w, p2)
+    tmpl.Execute(writer, &person)
 }
 
 func main() {
