@@ -67,8 +67,9 @@
             <p>{{.Description}}</p>
 
             <br />
-            {{range $url := .Url}}
-                <p><a href="{{$url}}">Read more.</a></p>
+            <p>Read more on Wikipedia:</p>
+            {{range $url := .Urls}}
+                <p><a href="{{$url}}">{{$url}}</a></p>
             {{end}}
         </div>
     </section>
