@@ -6,7 +6,7 @@ import (
     "net/http"
 )
 
-func handler(writer http.ResponseWriter, request *http.Request) {
+func rootHandler(writer http.ResponseWriter, request *http.Request) {
     if request.URL.Path != "/" {
         http.Error(writer, "Not Found", http.StatusNotFound)
         return
@@ -20,8 +20,14 @@ func handler(writer http.ResponseWriter, request *http.Request) {
     tmpl.Execute(writer, &person)
 }
 
+func aboutHandler(writer http.ResponseWriter, request *http.Request) {
+    tmpl, _ := template.ParseFiles("about.html")
+    tmpl.Execute(writer, nil)
+}
+
 func main() {
-    http.HandleFunc("/", handler)
+    http.HandleFunc("/", rootHandler)
+    http.HandleFunc("/about", aboutHandler)
     // ListenAndServe always returns an error, since it only returns when an unexpected error occurs.
     // in order to log that error we wrap the function call in log.Fatal.
     log.Fatal(http.ListenAndServe(":8080", nil))
