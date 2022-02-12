@@ -12,17 +12,17 @@ func rootHandler(writer http.ResponseWriter, request *http.Request) {
         return
     }
 
-    tmpl, _ := template.ParseFiles("index.html")
+    tmpl := template.Must(template.New("index").ParseFiles("base.html", "index.html"))
 
     person := GetRandomName()
 
     // executes the template, writing the generated HTML to the http.ResponseWriter
-    tmpl.Execute(writer, &person)
+    tmpl.ExecuteTemplate(writer, "base", &person)
 }
 
 func aboutHandler(writer http.ResponseWriter, request *http.Request) {
-    tmpl, _ := template.ParseFiles("about.html")
-    tmpl.Execute(writer, nil)
+    tmpl := template.Must(template.New("about").ParseFiles("base.html", "about.html"))
+    tmpl.ExecuteTemplate(writer, "base", nil)
 }
 
 func main() {
