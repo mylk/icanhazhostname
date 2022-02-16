@@ -1,0 +1,12 @@
+version: "2"
+services:
+    app:
+        build: .
+        ports:
+            - "8003:8080"
+        volumes:
+            - ./:/go/src
+volumes:
+    modules:
+        driver: "local"
+
