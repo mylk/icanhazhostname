@@ -8,19 +8,19 @@
             <br />
             <p>Read more on Wikipedia:</p>
             {{ range $url := .Urls }}
-                <p><a href="{{ $url }}">{{ $url }}</a></p>
+                <p><a href="{{ $url }}" target="_blank">{{ $url }}</a></p>
             {{ end }}
         </div>
     </section>
 
     <section class="bottom-bar">
-        <p>Do you just want <a href="/plain">a hostname in plain text?</a></p>
+        <p>Do you just want <a href="plain">a hostname in plain text?</a></p>
     </section>
 
     <section class="bottom-bar">
-        <p><a href="/about">about</a></p>
+        <p><a href="about">about</a></p>
         <p>|</p>
-        <p>created by <a href="https://github.com/mylk">mylk</a></p>
+        <p>created by <a href="https://github.com/mylk" target="_blank">mylk</a></p>
     </section>
 {{ end }}
 
